@@ -45,7 +45,7 @@ public class IntStreams {
 //                .forEach(System.out::println);
         // this will only print 10 values
         IntStream.iterate(0, val -> val + 1)
-                .limit(10)
+                .limit(11)
                 .forEach(System.out::println);
     }
 }

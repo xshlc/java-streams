@@ -17,12 +17,20 @@ public class Filtering {
     @Test
     public void filter() throws Exception {
         List<Car> cars = MockData.getCars();
+        // filter takes a predicate
+        List<Car> carsLessThan20k = cars.stream()
+                .filter(car -> car.getPrice() < 20_000.00)
+                .filter(car -> car.getColor()
+                        .equals("Yellow"))
+                .collect(Collectors.toList());
+        carsLessThan20k.forEach(System.out::println);
     }
 
     @Test
     public void dropWhile() throws Exception {
         System.out.println("using filter");
-        Stream.of(2, 4, 6, 8, 9, 10, 12).filter(n -> n % 2 == 0)
+        Stream.of(2, 4, 6, 8, 9, 10, 12)
+                .filter(n -> n % 2 == 0)
                 .forEach(n -> System.out.print(n + " "));
         System.out.println();
         System.out.println("using dropWhile");
@@ -32,7 +40,8 @@ public class Filtering {
     public void takeWhile() throws Exception {
         // using filter
         System.out.println("using filter");
-        Stream.of(2, 4, 6, 8, 9, 10, 12).filter(n -> n % 2 == 0)
+        Stream.of(2, 4, 6, 8, 9, 10, 12)
+                .filter(n -> n % 2 == 0)
                 .forEach(n -> System.out.print(n + " "));
 
         System.out.println();

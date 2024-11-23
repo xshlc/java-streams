@@ -89,11 +89,22 @@ public class Filtering {
     @Test
     public void allMatch() throws Exception {
         int[] even = {2, 4, 6, 8, 10};
+        // we want to make sure that all the numbers
+        // in this list are even
+
+        int[] oneOdd = {2, 4, 6, 8, 10, 11};
+        boolean allMatch = Arrays.stream(oneOdd)
+                .allMatch(n -> n % 2 == 0);
+        System.out.println(allMatch);
     }
 
     @Test
     public void anyMatch() throws Exception {
         int[] evenAndOneOdd = {2, 4, 6, 8, 10, 11};
+
+        boolean anyMatch = Arrays.stream(evenAndOneOdd)
+                .anyMatch(n -> !(n % 2 == 0));
+        System.out.println(anyMatch);
     }
 
 }

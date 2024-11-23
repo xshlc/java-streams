@@ -28,13 +28,14 @@ public class TransformationsMapAndReduce {
                     return new PersonDTO(person.getId(), person.getFirstName(), person.getAge());
                 });
         // refactored version
-        List<PersonDTO> peopleDTO = people.stream()
-                .map(person -> new PersonDTO(
+        Function<Person, PersonDTO> personPersonDTOFunction = person ->
+                new PersonDTO(
                         person.getId(),
                         person.getFirstName(),
-                        person.getAge()))
+                        person.getAge());
+        List<PersonDTO> peopleDTO = people.stream()
+                .map(personPersonDTOFunction)
                 .collect(Collectors.toList());
-
 
         //org.assertj.core.api.Assertions.assertThat(peopleDTO);
         assertThat(people.size()).isEqualTo(peopleDTO.size());

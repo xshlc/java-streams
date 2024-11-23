@@ -27,22 +27,33 @@ public class TransformationsMapAndReduce {
                 .map(person -> {
                     return new PersonDTO(person.getId(), person.getFirstName(), person.getAge());
                 });
-
+        // refactored version
         List<PersonDTO> peopleDTO = people.stream()
+                .map(person -> new PersonDTO(
+                        person.getId(),
+                        person.getFirstName(),
+                        person.getAge()))
+                .collect(Collectors.toList());
+
+
+        //org.assertj.core.api.Assertions.assertThat(peopleDTO);
+        assertThat(people.size()).isEqualTo(peopleDTO.size());
+
+
+        List<PersonDTO> peopleDTO2 = people.stream()
+                .filter(person -> person.getAge() > 20)
                 .map(person -> {
                     PersonDTO personDTO = new PersonDTO(person.getId(), person.getFirstName(), person.getAge());
                     return personDTO;
                 })
                 .collect(Collectors.toList());
+        System.out.println("eeee");
 
-        //org.assertj.core.api.Assertions.assertThat(peopleDTO);
-        assertThat(people.size()).isEqualTo(peopleDTO.size());
         // this lambda below can be replaced with a method reference
 //        peopleDTO.forEach(person -> {
 //            System.out.println(person);
 //        });
-        System.out.println("eeee");
-        peopleDTO.forEach(System.out::println); // here is the method reference
+        peopleDTO2.forEach(System.out::println); // here is the method reference
     }
 
     @Test

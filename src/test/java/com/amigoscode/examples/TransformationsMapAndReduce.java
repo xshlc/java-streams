@@ -40,6 +40,21 @@ public class TransformationsMapAndReduce {
         //org.assertj.core.api.Assertions.assertThat(peopleDTO);
         assertThat(people.size()).isEqualTo(peopleDTO.size());
 
+        /// ///
+
+        // inside PersonDTO class:
+        /*
+        public static PersonDTO map(Person person) {
+        return new PersonDTO(
+                person.getId(),
+                person.getFirstName(),
+                person.getAge());
+        }
+         */
+        List<PersonDTO> dto = people.stream()
+                .filter(person -> person.getAge() > 20)
+                .map(PersonDTO::map) // we can use map() inside PersonDTO class
+                .collect(Collectors.toList());
 
         List<PersonDTO> peopleDTO2 = people.stream()
                 .filter(person -> person.getAge() > 20)
@@ -54,7 +69,7 @@ public class TransformationsMapAndReduce {
 //        peopleDTO.forEach(person -> {
 //            System.out.println(person);
 //        });
-        peopleDTO2.forEach(System.out::println); // here is the method reference
+        dto.forEach(System.out::println); // here is the method reference
     }
 
     @Test

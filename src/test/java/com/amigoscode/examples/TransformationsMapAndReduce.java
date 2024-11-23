@@ -96,6 +96,9 @@ public class TransformationsMapAndReduce {
                 .reduce(0, Integer::sum);
         System.out.println(sum2);
 
+        int sub = Arrays.stream(integers)
+                .reduce(0, (a, b) -> a - b);
+        System.out.println(sub);
     }
 }
 

@@ -35,6 +35,12 @@ public class Filtering {
                 .forEach(n -> System.out.print(n + " "));
         System.out.println();
         System.out.println("using dropWhile");
+        // drops the elements that match the condition
+        // and then returns all of the remaining
+        // here, 9 doesn't match the condition so we return "9 10 12"
+        Stream.of(2, 4, 6, 8, 9, 10, 12)
+                .dropWhile(n -> n % 2 == 0)
+                .forEach(n -> System.out.print(n + " "));
     }
 
     @Test
@@ -47,6 +53,11 @@ public class Filtering {
 
         System.out.println();
         System.out.println("using take while");
+        // the takeWhile() function will stop after 9
+        // because 9 is not divisible by 2
+        Stream.of(2, 4, 6, 8, 9, 10, 12)
+                .takeWhile(n -> n % 2 == 0)
+                .forEach(n -> System.out.print(n + " "));
     }
 
     @Test

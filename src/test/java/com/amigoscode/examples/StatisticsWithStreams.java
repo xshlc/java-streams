@@ -98,6 +98,18 @@ public class StatisticsWithStreams {
     @Test
     public void statistics() throws Exception {
         List<Car> cars = MockData.getCars();
+        // this is a more expensive operation
+        // however, it does give all the data in one go`
+        // Summary Statistics
+        DoubleSummaryStatistics stats = cars.stream()
+                .mapToDouble(Car::getPrice)
+                .summaryStatistics();
+        System.out.println(stats);
+        System.out.println(stats.getCount());
+        System.out.println(stats.getMin());
+        System.out.println(stats.getMax());
+        System.out.println(stats.getAverage());
+        System.out.println(BigDecimal.valueOf(stats.getSum()));
     }
 
 }

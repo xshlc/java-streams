@@ -75,11 +75,27 @@ public class TransformationsMapAndReduce {
     @Test
     void mapToDoubleAndFindAverageCarPrice() throws IOException {
         List<Car> cars = MockData.getCars();
+        int total = 0;
+        double avg = cars.stream()
+                .mapToDouble(Car::getPrice)
+                .average()
+                .orElse(0);
+        System.out.println("average: " + avg);
     }
 
     @Test
     public void reduce() {
         int[] integers = {1, 2, 3, 4, 99, 100, 121, 1302, 199};
+        // map transform one data type to another
+        // reduce allows you to produce one single result from a sequence of elements
+        // we want the sum for each number
+        int sum = Arrays.stream(integers)
+                .reduce(0, (a, b) -> a + b);
+        System.out.println(sum);
+        int sum2 = Arrays.stream(integers)
+                .reduce(0, Integer::sum);
+        System.out.println(sum2);
+
     }
 }
 

@@ -26,9 +26,10 @@ public class Sorting {
     @Test
     public void sortingSteamOfElementsReverse() throws IOException {
         List<Person> people = MockData.getPeople();
+        Comparator<String> comparator = Comparator.reverseOrder();
         List<String> sorted = people.stream()
                 .map(Person::getFirstName)
-                .sorted(Comparator.reverseOrder())
+                .sorted(comparator)
                 .collect(Collectors.toList());
         sorted.forEach(System.out::println);
     }
@@ -36,6 +37,13 @@ public class Sorting {
     @Test
     public void sortingSteamOfObjets() throws IOException {
         List<Person> people = MockData.getPeople();
+//        Comparator<Person> comparing = Comparator.comparing(Person::getFirstName);
+        Comparator<Person> comparing = Comparator.comparing(Person::getLastName)
+                .reversed();
+        List<Person> sorted = people.stream()
+                .sorted(comparing)
+                .collect(Collectors.toList());
+        sorted.forEach(System.out::println);
     }
 
     @Test

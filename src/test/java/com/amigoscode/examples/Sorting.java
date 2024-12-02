@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Sorting {
 
@@ -50,6 +51,27 @@ public class Sorting {
     @Test
     public void topTenMostExpensiveBlueCars() throws IOException {
         List<Car> cars = MockData.getCars();
+        // Incorrect attempt:
+//        cars.stream()
+//                .map(car -> {
+//                    return car.getColor()
+//                            .equals("blue");
+//                })
+//                .sorted(Comparator.comparing(Car::getPrice))
+//                .limit(10)
+//                .forEach(System.out::println);
+        // End of incorrect attempt
+
+        /*
+        Top ten expensive BLUE cars
+         */
+        List<Car> topTenBlue = cars.stream()
+                .filter(car -> car.getColor()
+                        .equalsIgnoreCase("blue"))
+                .sorted(Comparator.comparing(Car::getPrice))
+                .limit(10)
+                .collect(Collectors.toList());
+        topTenBlue.forEach(System.out::println);
     }
 
 }

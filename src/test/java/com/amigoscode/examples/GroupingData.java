@@ -39,9 +39,11 @@ public class GroupingData {
                 "Alex"
         );
         // find the frequency for each name
-        Map<String, Long> map = names.stream()
-                .collect(Collectors.groupingBy(s -> s, Collectors.counting()));
-        System.out.println(map);
+//        Map<String, Long> map = names.stream()
+//                .collect(Collectors.groupingBy(s -> s, Collectors.counting()));
+        Map<String, Long> map2 = names.stream()
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+        System.out.println(map2);
     }
 
 }

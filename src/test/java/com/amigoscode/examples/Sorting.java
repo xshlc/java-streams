@@ -38,8 +38,9 @@ public class Sorting {
     public void sortingSteamOfObjets() throws IOException {
         List<Person> people = MockData.getPeople();
 //        Comparator<Person> comparing = Comparator.comparing(Person::getFirstName);
-        Comparator<Person> comparing = Comparator.comparing(Person::getLastName)
-                .reversed();
+        Comparator<Person> comparing = Comparator.comparing(Person::getEmail)
+                .reversed()  // email will be reversed but not the first name
+                .thenComparing(Person::getFirstName);
         List<Person> sorted = people.stream()
                 .sorted(comparing)
                 .collect(Collectors.toList());

@@ -16,12 +16,32 @@ public class UnderstandingStreams {
         List<String> emails = MockData.getPeople()
                 .stream()
                 .map(Person::getEmail)
+                .collect(Collectors.toList());
+//        emails.forEach(System.out::println);
+        System.out.println("============================");
+        System.out.println("============================");
+        ///  Same thing as using collect(Collectors.toList())
+        List<String> emails1 = MockData.getPeople()
+                .stream()
+                .map(Person::getEmail)
                 .collect(
                         ArrayList::new,
                         ArrayList::add,
                         ArrayList::addAll
                 );
-        emails.forEach(System.out::println);
+        emails1.forEach(System.out::println);
+        ///  Same thing as above
+        List<String> emails2 = MockData.getPeople()
+                .stream()
+                .map(Person::getEmail)
+                .collect(
+                        () -> new ArrayList<String>(), // supplier
+                        (list, element) -> list.add(element), // accumulator
+                        (list1, list2) -> list1.addAll(list2) // combiner
+                );
+        // emails2.forEach(System.out::println);
+        // emails2.forEach(email -> System.out.println(String.format("  %s", email)));
+//        emails2.forEach(email -> System.out.println("  " + email));
     }
 
     @Test

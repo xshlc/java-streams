@@ -29,7 +29,7 @@ public class UnderstandingStreams {
                         ArrayList::add,
                         ArrayList::addAll
                 );
-        emails1.forEach(System.out::println);
+        //emails1.forEach(System.out::println);
         ///  Same thing as above
         List<String> emails2 = MockData.getPeople()
                 .stream()
@@ -40,12 +40,13 @@ public class UnderstandingStreams {
                         (list1, list2) -> list1.addAll(list2) // combiner
                 );
         // emails2.forEach(System.out::println);
-        // emails2.forEach(email -> System.out.println(String.format("  %s", email)));
+        emails2.forEach(email -> System.out.println(String.format("  %s", email)));
 //        emails2.forEach(email -> System.out.println("  " + email));
     }
 
     @Test
     public void lazy() throws Exception {
+        // observing the order that streams process data
         System.out.println(
                 MockData.getCars()
                         .stream()
@@ -53,6 +54,8 @@ public class UnderstandingStreams {
                             System.out.println("filter car " + car);
                             return car.getPrice() < 10000;
                         })
+                        // once it finds a car that is less than $10,000
+                        // ... it will process the mappings
                         .map(car -> {
                             System.out.println("mapping car " + car);
                             return car.getPrice();
